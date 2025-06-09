@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Per te, Sorellina 💚</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+<style>
+  body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background: #b2f7b2;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+    transition: background 0.5s ease;
+  }
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  .intro {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+  }
+  .reason-box {
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+  .reason, .image {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  .image {
+    width: 200px;
+    margin-bottom: 20px;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  .heart {
+    font-size: 2em;
+    margin-top: 20px;
+  }
+  button {
+    margin-top: 20px;
+    background-color: #000;
+    color: #b2f7b2;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background-color: #444;
+  }
+  .final-container {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background: black;
+    height: 100vh;
+    padding: 20px;
+  }
+  .final-container img {
+    width: 150px;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <h1>Per te, Sorellina 💚</h1>
+  <p class="intro">Questi sono i motivi per cui sono un ottimo fratello 😎</p>
+  <div class="reason-box" id="reasonBox">
+    <img id="image" class="image" src="" alt="SpongeBob & Patrick" />
+    <div id="reason" class="reason">Caricamento motivi...</div>
+    <div class="heart">💚</div>
+    <button id="nextBtn" onclick="showNextReason()">Avanti</button>
+  </div>
+
+  <div class="final-container" id="finalContainer">
+    <div class="final-text">E perché ti rubo il cibo che nascondi per te 😈🍕</div>
+    <img src="dito-medio.png" alt="dito medio cartoon" style="width:150px; margin-top:20px;" />
+  </div>
+
+<script>
+  const reasons = [
+    "Perché ti proteggo sempre, anche quando fai finta di non averne bisogno.",
+    "Perché ti faccio ridere anche nei momenti peggiori.",
+    "Perché condividiamo ricordi che nessun altro capirebbe.",
+    "Perché anche quando litighiamo, sono sempre al tuo fianco.",
+    "Perché ti ascolto davvero, anche quando parli per ore.",
+    "Perché so quando lasciarti in pace e quando farti ridere.",
+    "Perché sono il tuo fratello preferito (ammettilo 😎).",
+    "Perché senza di me, chi ti sopporterebbe così bene?",
+  ];
+
+  const images = [
+    "https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif",
+    "https://media.giphy.com/media/fAnEC88LccN7a/giphy.gif",
+    "https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif",
+    "https://media.giphy.com/media/3oEduSbSGpGaRX2Vri/giphy.gif"
+  ];
+
+  let index = 0;
+  const reasonDiv = document.getElementById("reason");
+  const imageEl = document.getElementById("image");
+  const nextBtn = document.getElementById("nextBtn");
+  const reasonBox = document.getElementById("reasonBox");
+  const finalContainer = document.getElementById("finalContainer");
+  const body = document.body;
+
+  function showNextReason() {
+    reasonDiv.style.opacity = 0;
+    imageEl.style.opacity = 0;
+    setTimeout(() => {
+      if (index < reasons.length) {
+        reasonDiv.textContent = reasons[index];
+        imageEl.src = images[index % images.length];
+        reasonDiv.style.animation = "none";
+        imageEl.style.animation = "none";
+        void reasonDiv.offsetWidth;
+        void imageEl.offsetWidth;
+        reasonDiv.style.animation = "fadeIn 1s forwards";
+        imageEl.style.animation = "fadeIn 1s forwards";
+        index++;
+      } else {
+        // Finale
+        reasonBox.style.display = "none";
+        body.style.background = "#000";
+        finalContainer.style.display = "flex";
+      }
+    }, 300);
+  }
+
+  window.onload = showNextReason;
+</script>
+</body>
+</html>
